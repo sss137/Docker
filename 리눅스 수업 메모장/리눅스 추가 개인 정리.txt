@@ -3,8 +3,8 @@
   |
   ----->nginx(ws) ------ > tomcat(8080, was), mysql(3306)
      리버스 프록시 서버
-ws - 자바 코드 해석 불가(정적)
-was - 자바 코드 해석 가능(동적)
+w.s - 정적(자바 코드 해석 불가)
+w.a.s - 동적(자바 코드 해석 가능)
 
 #
 3계층 구조(Three-Tier Architecture)
