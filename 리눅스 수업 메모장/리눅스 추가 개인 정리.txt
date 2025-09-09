@@ -1,7 +1,7 @@
 #
 클라이언트 -----(x)----- > 서버(ip)
   |
-  ----->nginx(ws) ------ > tomcat(8080, was), mysql(3306)
+  ----->nginx(w.s) ------ > tomcat(8080, w.a.s), mysql(3306)
      리버스 프록시 서버
 w.s - 정적(자바 코드 해석 불가)
 w.a.s - 동적(자바 코드 해석 가능)
@@ -50,5 +50,15 @@ MySQL (DB 서버)
 
 #
 SSH는 내 PC에서 멀리 있는 서버의 터미널을 그대로 불러와서, 마치 로컬에서 작업하듯 안전하게 조종하고 파일까지 주고받을 수 있게 해주는 기술
+
+#
+서버       : ~/nginx/html 
+                   |   <<   bind mount(폴더와 폴더를 직접 연결, 백업을 위해)
+컨테이너 : /usr/share/nginx/html(nginx 실행 시 첫 화면을 보여주는 index.html)
+
+#
+서버       : 도커 볼륨(백업 담당자) - docker volume create 볼륨명
+	           |   <<   volume mount(백업을 위해)
+컨테이너 : /usr/share/nginx/html
 
 
