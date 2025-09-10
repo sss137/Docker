@@ -1,0 +1,19 @@
+# 베이스 이미지
+FROM ubuntu:22.04
+
+# 컨테이너 실행 시 항상 실행할 명령
+ENTRYPOINT ["echo"]
+
+# 컨테이너 실행 시 전달할 인자
+CMD ["Hello World"]
+
+### 실행방법
+### 1. 이미지 빌드 (이미지 만들기)
+###    goodee@server1:~/dockerfiles$ docker build -t myubuntu:2.0 -f Dockerfile2 .
+### 2. 컨테이너 실행
+###    1) CMD 그대로 사용
+###    goodee@server1:~/dockerfiles$ docker run --rm myubuntu:2.0
+###    Hello World
+###    2) CMD 변경 (이미지명 다음에 전달하는 인자는 CMD로 전달)
+###    goodee@server1:~/dockerfiles$ docker run --rm myubuntu:2.0 "Hi World"
+###    Hi World

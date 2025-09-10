@@ -1,0 +1,33 @@
+# 베이스 이미지
+FROM ubuntu:22.04
+
+# 이미지 빌드 시 전달 받는 인자값
+# 이미지 빌드 시점에서만 사용이 가능함 (컨테이너 실행 시 사용이 불가능함)
+# docker build --build-arg BUILD_MSG=값
+# $BUILD_MSG, ${BUILD_MSG} 방식으로 도커 파일 내부에서 값 확인 가능
+ARG BUILD_MSG
+
+# 이미지 빌드와 컨테이너 실행 시 사용할 수 있는 환경변수
+# 컨테이너 실행(docker run) 시 "-e ENV_MSG=값" 옵션으로 도커 파일에 명시된 환경 변수를 바꿀 수 있음
+# 컨테이너 실행(docker run) 후 컨테이너 내부(docker exec)로 들어가서 env 명령 입력 시 확인 가능
+# $ENV_MSG 또는 ${ENV_MSG} 방식으로 도커 파일 내부에서 값 확인 가능
+ENV ENV_MSG=$BUILD_MSG
+
+# 이미지 빌드 시 실행할 명령어
+# 용도  : 이미지를 만들 때 필요한 작업 (소프트웨어 패키지 설치, 파일 복사, 설정 변경 등)
+# 레이어: 각 RUN 명령은 새로운 레이어를 생성하므로 가능하면 줄이는 것이 유리함
+RUN echo 이미지 빌드 시점 : $BUILD_MSG
+
+# 컨테이너 실행 시 항상 실행할 명령
+ENTRYPOINT echo ${ENV_MSG}
+
+### 실행방법
+### 1. 이미지 빌드 (이미지 만들기)
+###    --build-arg BUILD_MSG=Hello : ARG BUILD_MSG로 Hello 전달
+###    goodee@server1:~/dockerfiles$ docker build --build-arg BUILD_MSG=Hello -t myubuntu:4.0 -f Dockerfile4 .
+###    ...
+###    => [2/2] RUN echo 이미지 빌드 시점 : Hello                                             1.2sporting to image
+###    ...
+### 2. 컨테이너 실행
+###    goodee@server1:~/dockerfiles$ docker run --rm myubuntu:4.0
+###    Hello

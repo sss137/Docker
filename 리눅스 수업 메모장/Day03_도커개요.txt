@@ -23,7 +23,7 @@
   3) Docker Compose
     (1) 여러 개의 Docker Container를 관리하기 위한 툴
     (2) 여러 Docker Container의 구성 정보를 yml 형식으로 정의
-  4) Docker Swarm
+  4) Docker Swarm  <<  중요 x
     (1) Docker Host들을 클러스터로 구성해서 관리하는 오케스트레이션 툴
     (2) Kubernates가 사실상 Docker Swarm을 대체하였음
 

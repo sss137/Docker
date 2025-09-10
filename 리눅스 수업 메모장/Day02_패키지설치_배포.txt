@@ -212,7 +212,7 @@ Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/
 
 # 31. 애플리케이션 실행을 위한 데이터베이스 준비(쿼리 스크립트 실행하기)
 #     DeployProject 내부에 있는 schema.sql을 열어서 곧바로 실행하기
-goodee@server1:~/DeployProject$ cat ./src/main/resources/schema.sql | mysql -u goode  e -p
+goodee@server1:~/DeployProject$ cat ./src/main/resources/schema.sql | mysql -u goodee -p
 
 # 32. 확인을 위해 데이터베이스 접속
 goodee@server1:~/DeployProject$ mysql -u goodee -p

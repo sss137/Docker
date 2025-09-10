@@ -1,0 +1,29 @@
+# 베이스 이미지
+FROM ubuntu:22.04
+
+# 이미지 빌드 시 실행할 명령어
+RUN apt update && apt install -y openjdk-11-jdk
+
+# 이미지 빌드와 컨테이너 실행 시 사용할 수 있는 환경변수
+# 컨테이너 실행(docker run) 후 컨테이너 내부(docker exec)로 들어가서 env 명령 입력 시 확인 가능
+ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+
+# 컨테이너 실행 시 기본 작업 위치 지정
+# 컨테이너 내부로 들어가면(docker exec) 기본 경로로 설정되어 있음
+WORKDIR /home/javatest
+
+### 실행방법
+### 1. 이미지 빌드 (이미지 만들기)
+###    goodee@server1:~/dockerfiles$ docker build -t myubuntu:5.0 -f Dockerfile5 .
+### 2. 컨테이너 실행
+###    -d   : 백그라운드 실행
+###    -i   : interactive. 키보드 입력을 컨테이너로 전달할 수 있게 유지함
+###    -t   : tty. 터미널 환경을 제공함
+###    -dit : 모든 옵션을 지정하면, 컨테이너가 즉시 종료되지 않고(OS 이미지는 컨테이너 생성 시 기본적으로 바로 종료됨) 표준 입력 상태로 대기함 
+###    goodee@server1:~/dockerfiles$ docker run -dit myubuntu:5.0
+###    goodee@server1:~/dockerfiles$ docker ps
+###    CONTAINER ID   IMAGE        COMMAND       CREATED         STATUS         PORTS     NAMES
+###    edf405c8b4ec   myubuntu:5.0 "/bin/bash"   5 seconds ago   Up 5 seconds             loving_gates
+###    goodee@server1:~/dockerfiles$ docker exec -it loving_gates bash
+###    root@edf405c8b4ec:/home/javatest# env | grep JAVA_HOME
+###    JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
